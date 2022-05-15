@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokedex</title>
+</head>
+
+<header>
+    <h1>Pokedex</h1>
+</header>
+
+<body>
+    <main>
+        <span id="name"></span>
+    </main>
+</body>
+
+<script>
+    async function getContent() {
+        try {
+            const response = await fetch('http://localhost:3000/')
+            const data = await response.json()
+            show(data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    getContent()
+
+    function show(answer) {
+        let name = '';
+        let pokemonName = answer.results;
+        // console.log(pokemonName[24])
+        for (let pokemon of pokemonName) {
+            name += `<li><a href="http://localhost:3001/">${pokemon.name}</a></li>`
+        }
+        document.getElementById('name').innerHTML = name;
+    }
+</script>
+
+</html>
